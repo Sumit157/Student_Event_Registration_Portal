@@ -263,7 +263,7 @@ const Alumni = (() => {
           // back into this tab via window.opener.
           UI.el('a', {
             class: 'btn btn--primary btn--sm', href: job.applyUrl, target: '_blank',
-            rel: 'noopener noreferrer', text: 'Apply ↗',
+            rel: 'noopener noreferrer', text: 'Apply',
           }),
         ]),
       ]),

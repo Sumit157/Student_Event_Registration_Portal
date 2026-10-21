@@ -322,7 +322,7 @@ const Events = (() => {
         UI.seatMeter({ capacity: event.capacity, taken: info.confirmed, seatsRemaining: info.seatsRemaining })
           || UI.el('p', { text: `${info.confirmed || 0} of ${event.capacity} seats taken` }),
         UI.el('div', { class: 'seats' }, [seatsLabel({ ...event, seatsRemaining: info.seatsRemaining }) || UI.el('span', { text: '—' })]),
-        info.waitlisted > 0 ? UI.el('p', { class: 'field__hint', text: `${info.waitlisted} student(s) currently waitlisted.` }) : null,
+        info.waitlisted > 0 ? UI.el('p', { class: 'field__hint', text: `${info.waitlisted} student${info.waitlisted === 1 ? '' : 's'} currently waitlisted.` }) : null,
       ]),
     ]);
 
@@ -506,7 +506,9 @@ const Events = (() => {
 
     const actionArea = UI.el('div', { class: 'row row--end' });
     if (!cancelled) {
-      const cancelBtn = UI.el('button', { class: 'btn btn--danger btn--sm', type: 'button', text: 'Cancel' });
+      // Quiet in the list — the destructive weight lives in the confirm dialog,
+      // not as a red button on every row.
+      const cancelBtn = UI.el('button', { class: 'btn btn--ghost btn--sm', type: 'button', text: 'Cancel' });
       cancelBtn.addEventListener('click', async () => {
         const ok = await UI.confirmDialog({
           title: 'Cancel registration?',
@@ -546,7 +548,7 @@ const Events = (() => {
         ]),
       ]),
       UI.el('div', { class: 'row row--between', style: { marginTop: '12px' } }, [
-        UI.el('span', { class: 'seats', text: row.seatsRemaining === 0 ? 'Event is full' : `${row.seatsRemaining} seat(s) remaining` }),
+        UI.el('span', { class: 'seats', text: row.seatsRemaining === 0 ? 'Event is full' : `${row.seatsRemaining} seat${row.seatsRemaining === 1 ? '' : 's'} remaining` }),
         actionArea,
       ]),
     ]);

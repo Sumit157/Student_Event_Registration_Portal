@@ -16,41 +16,43 @@
   <main id="main">
     <!-- Hero ------------------------------------------------------------- -->
     <section class="hero">
-      <div class="container">
-        <p class="hero__kicker">Student events &amp; alumni network</p>
-        <h1 class="hero__title">Everything campus, in one portal.</h1>
-        <p class="hero__lede">
-          Discover and register for college events, track your seats and waitlists, follow
-          campus announcements, and stay connected with alumni who have been where you are going.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary btn--lg" href="/register.html">Create your account</a>
-          <a class="btn btn--secondary btn--lg" href="/events.html">Browse events</a>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="hero__kicker">Student events &amp; alumni network</p>
+          <h1 class="hero__title">Everything campus, in one portal.</h1>
+          <p class="hero__lede">
+            Discover and register for college events, track your seats and waitlists, follow
+            campus announcements, and stay connected with alumni who have been where you are going.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="/register.html">Create your account</a>
+            <a class="btn btn--secondary btn--lg" href="/events.html">Browse events</a>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Live stats ------------------------------------------------------- -->
-    <section class="page">
-      <div class="container">
-        <div class="ticker" id="landing-stats">
-          <div class="ticker__item">
-            <span class="ticker__value" id="stat-events">—</span>
-            <span class="ticker__label">Upcoming events</span>
+        <!-- Live counts, moved into the hero so the panel fills the space
+             with real data instead of leaving a gradient void. -->
+        <aside class="hero__ledger" aria-label="Live portal activity">
+          <p class="hero__ledger-label">Live on the portal</p>
+          <div class="ticker" id="landing-stats">
+            <div class="ticker__item">
+              <span class="ticker__value" id="stat-events">—</span>
+              <span class="ticker__label">Upcoming events</span>
+            </div>
+            <div class="ticker__item">
+              <span class="ticker__value" id="stat-alumni">—</span>
+              <span class="ticker__label">Alumni network</span>
+            </div>
+            <div class="ticker__item">
+              <span class="ticker__value" id="stat-jobs">—</span>
+              <span class="ticker__label">Open roles</span>
+            </div>
+            <div class="ticker__item">
+              <span class="ticker__value" id="stat-news">—</span>
+              <span class="ticker__label">Campus news</span>
+            </div>
           </div>
-          <div class="ticker__item">
-            <span class="ticker__value" id="stat-alumni">—</span>
-            <span class="ticker__label">Alumni network</span>
-          </div>
-          <div class="ticker__item">
-            <span class="ticker__value" id="stat-jobs">—</span>
-            <span class="ticker__label">Open roles</span>
-          </div>
-          <div class="ticker__item">
-            <span class="ticker__value" id="stat-news">—</span>
-            <span class="ticker__label">Campus news</span>
-          </div>
-        </div>
+        </aside>
       </div>
     </section>
 
@@ -124,17 +126,17 @@
           </div>
           <div class="grid grid--cards">
             <div class="stack-sm">
-              <span class="badge badge--role">Student</span>
+              <span class="badge badge--role hug">Student</span>
               <p style="margin:0;color:var(--text-muted);font-size:.93rem;">Browse events, register, join waitlists, manage your schedule and read campus news.</p>
               <a class="btn btn--secondary" href="/register.html">Join as a student</a>
             </div>
             <div class="stack-sm">
-              <span class="badge badge--pending">Alumni</span>
+              <span class="badge badge--pending hug">Alumni</span>
               <p style="margin:0;color:var(--text-muted);font-size:.93rem;">Build a profile, appear in the directory after approval, post jobs and connect with peers.</p>
               <a class="btn btn--secondary" href="/register.html">Join as alumni</a>
             </div>
             <div class="stack-sm">
-              <span class="badge badge--confirmed">Administrator</span>
+              <span class="badge badge--confirmed hug">Administrator</span>
               <p style="margin:0;color:var(--text-muted);font-size:.93rem;">Manage events and capacity, approve alumni, moderate accounts and export registration reports.</p>
               <p class="field__hint" style="margin:0;">Administrator accounts are created by the college, not through public sign-up.</p>
             </div>

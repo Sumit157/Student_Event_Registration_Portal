@@ -67,7 +67,7 @@ const Admin = (() => {
         { label: 'Confirmed registrations', value: s.registrations.confirmed, hint: `${s.registrations.waitlisted} waitlisted` },
         { label: 'Approved alumni', value: s.alumni.approved, hint: `${s.alumni.pending} awaiting approval` },
         { label: 'Active jobs', value: s.jobs.active, hint: `${s.jobs.total} posted in total` },
-        { label: 'Suspended accounts', value: s.users.suspended, hint: `${s.users.admins} administrator(s)` },
+        { label: 'Suspended accounts', value: s.users.suspended, hint: `${s.users.admins} administrator${s.users.admins === 1 ? '' : 's'}` },
       ];
 
       UI.replace(slot, tiles.map((tile) => UI.el('div', { class: 'stat' }, [
