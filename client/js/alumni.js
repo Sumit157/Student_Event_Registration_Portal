@@ -242,7 +242,9 @@ const Alumni = (() => {
   function renderJobRow(job) {
     const expired = job.deadline && new Date(job.deadline) < new Date();
 
-    return UI.el('article', { class: 'card' }, [
+    // The id makes the `/jobs.html#job-N` "Details" deep link (and the browser
+    // back button) land on this card instead of a dead anchor.
+    return UI.el('article', { class: 'card', id: `job-${job.id}` }, [
       UI.el('div', { class: 'row row--between' }, [
         UI.el('div', { class: 'grow' }, [
           UI.el('h3', { class: 'card__title', text: job.title }),

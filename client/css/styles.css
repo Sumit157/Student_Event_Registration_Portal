@@ -146,7 +146,11 @@
    -------------------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+
+/* Anchor targets (e.g. jobs #job-N deep links) must clear the 64px sticky
+   navbar instead of scrolling underneath it. */
+[id] { scroll-margin-top: 84px; }
 
 body {
   margin: 0;
@@ -180,6 +184,10 @@ p  { margin: 0 0 var(--space-3); }
 
 a { color: var(--petrol-600); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* No double-tap-to-zoom delay on controls. */
+a, button, .btn, .tab, .page-btn, .navbar__link, .role-option,
+input, select, textarea { touch-action: manipulation; }
 
 /* Every focusable element gets a clear, high-contrast ring. */
 :focus-visible {
@@ -452,8 +460,13 @@ a:hover { text-decoration: underline; text-underline-offset: 2px; }
 .textarea { min-height: 110px; resize: vertical; line-height: 1.55; }
 .input::placeholder, .textarea::placeholder { color: var(--neutral-400); }
 .input:focus, .select:focus, .textarea:focus {
-  outline: none; border-color: var(--petrol-600);
-  box-shadow: 0 0 0 3px var(--petrol-100);
+  border-color: var(--petrol-600); box-shadow: 0 0 0 3px var(--petrol-100);
+}
+/* Keyboard focus must be unmistakable. The petrol halo on its own is only
+   ~1.2:1 on white, so give focused fields the same gold ring everything else
+   gets (3.2:1). :focus-visible keeps it off mouse clicks. */
+.input:focus-visible, .select:focus-visible, .textarea:focus-visible {
+  outline: 3px solid var(--gold); outline-offset: 1px;
 }
 .input:disabled, .select:disabled, .textarea:disabled { background: var(--neutral-100); cursor: not-allowed; }
 .input[aria-invalid="true"], .select[aria-invalid="true"], .textarea[aria-invalid="true"] {
@@ -908,7 +921,7 @@ a:hover { text-decoration: underline; text-underline-offset: 2px; }
 .modal {
   background: var(--surface); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg); width: 100%; max-width: 520px;
-  max-height: calc(100vh - 32px); overflow-y: auto; padding: var(--space-5);
+  max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain; padding: var(--space-5);
   animation: modal-in .2s cubic-bezier(.2, .7, .3, 1);
 }
 @keyframes modal-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
