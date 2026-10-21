@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Portal · Student Events &amp; Alumni Network</title>
+  <meta name="description" content="One college portal for event registration, the alumni directory, job postings and campus news.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+  <div id="verification-banner"></div>
+
+  <main id="main">
+    <!-- Hero ------------------------------------------------------------- -->
+    <section class="hero">
+      <div class="container">
+        <span class="badge badge--neutral" style="background:rgba(255,255,255,.18);color:#fff;">
+          Student Events &amp; Alumni Network
+        </span>
+        <h1 style="margin-top:12px;">Everything campus, in one portal.</h1>
+        <p>
+          Discover and register for college events, track your seats and waitlists, follow
+          campus announcements, and stay connected with alumni who have been where you are going.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="/register.html">Create your account</a>
+          <a class="btn btn--secondary btn--lg" href="/events.html">Browse events</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live stats ------------------------------------------------------- -->
+    <section class="page">
+      <div class="container">
+        <div class="grid grid--stats" id="landing-stats">
+          <div class="stat">
+            <div class="stat__label">Upcoming events</div>
+            <div class="stat__value" id="stat-events">—</div>
+            <div class="stat__hint">Open for registration now</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Alumni network</div>
+            <div class="stat__value" id="stat-alumni">—</div>
+            <div class="stat__hint">Verified &amp; approved members</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Open roles</div>
+            <div class="stat__value" id="stat-jobs">—</div>
+            <div class="stat__hint">Posted by alumni</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Campus news</div>
+            <div class="stat__value" id="stat-news">—</div>
+            <div class="stat__hint">Latest announcements</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features --------------------------------------------------------- -->
+    <section class="page" style="padding-top:0;">
+      <div class="container">
+        <div class="page__header">
+          <h2>What you can do here</h2>
+          <p class="page__subtitle">Three roles, one sign-in, no juggling separate systems.</p>
+        </div>
+
+        <div class="grid grid--cards">
+          <div class="card feature">
+            <div class="feature__icon" aria-hidden="true">🎟️</div>
+            <div>
+              <h3>Register for events</h3>
+              <p>Search by category and date, see live seat counts and a countdown, and get an automatic waitlist position when an event fills up.</p>
+            </div>
+          </div>
+
+          <div class="card feature">
+            <div class="feature__icon" aria-hidden="true">⏳</div>
+            <div>
+              <h3>Fair waitlists</h3>
+              <p>Cancel a confirmed place and the next eligible student is promoted automatically and notified by email.</p>
+            </div>
+          </div>
+
+          <div class="card feature">
+            <div class="feature__icon" aria-hidden="true">🎓</div>
+            <div>
+              <h3>Alumni directory</h3>
+              <p>Search graduates by year, degree and company. Only verified and administrator-approved profiles appear.</p>
+            </div>
+          </div>
+
+          <div class="card feature">
+            <div class="feature__icon" aria-hidden="true">💼</div>
+            <div>
+              <h3>Jobs &amp; opportunities</h3>
+              <p>Alumni share openings from their workplaces; students and peers browse and apply through verified links.</p>
+            </div>
+          </div>
+
+          <div class="card feature">
+            <div class="feature__icon" aria-hidden="true">🤝</div>
+            <div>
+              <h3>Build your network</h3>
+              <p>Send connection requests with clear pending, accepted and rejected states, then see your network in one view.</p>
+            </div>
+          </div>
+
+          <div class="card feature">
+            <div class="feature__icon" aria-hidden="true">📰</div>
+            <div>
+              <h3>Campus news</h3>
+              <p>Announcements with paginated discussion, so important updates never get buried in a chat group.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roles ------------------------------------------------------------ -->
+    <section class="page" style="padding-top:0;">
+      <div class="container">
+        <div class="card">
+          <div class="page__header" style="margin-bottom:20px;">
+            <h2 style="margin-bottom:6px;">Choose your path</h2>
+            <p class="page__subtitle">Your role decides where you land after signing in.</p>
+          </div>
+          <div class="grid grid--cards">
+            <div class="stack-sm">
+              <span class="badge badge--role">Student</span>
+              <p style="margin:0;color:var(--text-muted);font-size:.93rem;">Browse events, register, join waitlists, manage your schedule and read campus news.</p>
+              <a class="btn btn--secondary" href="/register.html">Join as a student</a>
+            </div>
+            <div class="stack-sm">
+              <span class="badge badge--pending">Alumni</span>
+              <p style="margin:0;color:var(--text-muted);font-size:.93rem;">Build a profile, appear in the directory after approval, post jobs and connect with peers.</p>
+              <a class="btn btn--secondary" href="/register.html">Join as alumni</a>
+            </div>
+            <div class="stack-sm">
+              <span class="badge badge--confirmed">Administrator</span>
+              <p style="margin:0;color:var(--text-muted);font-size:.93rem;">Manage events and capacity, approve alumni, moderate accounts and export registration reports.</p>
+              <p class="field__hint" style="margin:0;">Administrator accounts are created by the college, not through public sign-up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal · Student Event Registration &amp; Alumni Network</span>
+      <span><a href="/events.html">Events</a> · <a href="/alumni-directory.html">Alumni</a> · <a href="/jobs.html">Jobs</a> · <a href="/news.html">News</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/pages/index.js"></script>
+</body>
+</html>

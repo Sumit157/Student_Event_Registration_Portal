@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Campus Portal</title>
+  <meta name="description" content="Sign in to the campus portal.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+
+  <main id="main">
+    <div class="auth">
+      <div class="auth__card">
+        <div class="auth__brand">
+          <span class="navbar__logo" aria-hidden="true">🎓</span>
+          <span>Campus Portal</span>
+        </div>
+
+        <h1 class="auth__title">Welcome back</h1>
+        <p class="auth__subtitle">Sign in with your college account to continue.</p>
+
+        <div id="login-error" role="alert"></div>
+
+        <form class="form" id="login-form" novalidate>
+          <div class="field">
+            <label class="field__label" for="email">Email address</label>
+            <input class="input" type="email" id="email" name="email"
+                   autocomplete="email" required placeholder="you@college.edu">
+            <p class="field__error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="password">Password</label>
+            <input class="input" type="password" id="password" name="password"
+                   autocomplete="current-password" required placeholder="Your password">
+            <p class="field__error" aria-live="polite"></p>
+          </div>
+
+          <button class="btn btn--primary btn--block btn--lg" type="submit">Sign in</button>
+        </form>
+
+        <div class="row row--between" style="margin-top:16px;">
+          <a href="/forgot-password.html">Forgot password?</a>
+          <a href="/register.html">Create an account</a>
+        </div>
+
+        <p class="auth__footer">
+          After signing in you are taken straight to your own dashboard:
+          students to <strong>Events</strong>, alumni to <strong>Alumni</strong>,
+          administrators to <strong>Admin</strong>.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal</span>
+      <span><a href="/index.html">Home</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/pages/login.js"></script>
+</body>
+</html>

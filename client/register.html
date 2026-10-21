@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account · Campus Portal</title>
+  <meta name="description" content="Register as a student or alumnus on the campus portal.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+
+  <main id="main">
+    <div class="auth">
+      <div class="auth__card auth__card--wide">
+        <div class="auth__brand">
+          <span class="navbar__logo" aria-hidden="true">🎓</span>
+          <span>Campus Portal</span>
+        </div>
+
+        <h1 class="auth__title">Create your account</h1>
+        <p class="auth__subtitle">Register as a student or as an alumnus. Administrator accounts are created by the college only.</p>
+
+        <div id="register-success" role="status" aria-live="polite"></div>
+
+        <form class="form" id="register-form" novalidate>
+          <!-- Account type ------------------------------------------------ -->
+          <fieldset style="border:0;padding:0;margin:0;">
+            <legend class="field__label" style="margin-bottom:8px;">I am registering as</legend>
+            <div class="role-picker">
+              <label class="role-option">
+                <input type="radio" name="role" value="student" checked>
+                <span>🎓 Student<small>Join events and campus news</small></span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="alumni">
+                <span>🎓 Alumni<small>Build a profile, post jobs, connect</small></span>
+              </label>
+            </div>
+            <p class="field__hint" style="margin-top:8px;">
+              The administrator role is intentionally not available on this form.
+            </p>
+          </fieldset>
+
+          <!-- Core details ------------------------------------------------ -->
+          <div class="form-grid">
+            <div class="field">
+              <label class="field__label" for="name">Full name <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="name" name="name" required maxlength="120"
+                     autocomplete="name" placeholder="e.g. Priya Sharma">
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="collegeId">College ID / Roll number <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="collegeId" name="collegeId" required maxlength="50"
+                     placeholder="e.g. CS2024-017">
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">Email address <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="email" id="email" name="email" required autocomplete="email"
+                     placeholder="you@college.edu">
+              <p class="field__hint">We send a verification link here — it must work.</p>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="graduationYear">Graduation year</label>
+              <input class="input" type="number" id="graduationYear" name="graduationYear"
+                     min="1950" max="2100" step="1" placeholder="e.g. 2019" disabled>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="password">Password <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="password" id="password" name="password" required
+                     autocomplete="new-password" placeholder="Create a password">
+              <p class="field__error" aria-live="polite"></p>
+              <ul class="rules" id="password-rules" aria-label="Password requirements"></ul>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="confirmPassword">Confirm password <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="password" id="confirmPassword" name="confirmPassword" required
+                     autocomplete="new-password" placeholder="Type it again">
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <!-- Alumni-only section ----------------------------------------- -->
+          <div class="alumni-fields form-grid" id="alumni-fields">
+            <div class="field form-grid--full">
+              <label class="field__label" for="degree">Degree / Programme <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="degree" name="degree" maxlength="120"
+                     placeholder="e.g. B.Tech Computer Science" disabled>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="company">Company <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="company" name="company" maxlength="152"
+                     placeholder="e.g. Infosys" disabled>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="designation">Designation <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="designation" name="designation" maxlength="120"
+                     placeholder="e.g. Senior Engineer" disabled>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="alert alert--info form-grid--full">
+              <div class="grow">
+                <strong>Alumni accounts are reviewed</strong>
+                <span>Your profile appears in the public directory only after an
+                      administrator approves it. You can still sign in meanwhile.</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn--primary btn--block btn--lg" type="submit">Create my account</button>
+        </form>
+
+        <p class="auth__footer">
+          Already have an account? <a href="/login.html">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal</span>
+      <span><a href="/index.html">Home</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/pages/register.js"></script>
+</body>
+</html>

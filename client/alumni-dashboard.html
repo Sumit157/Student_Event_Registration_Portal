@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alumni dashboard · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+  <div id="verification-banner"></div>
+
+  <main id="main" class="page">
+    <div class="container">
+      <div class="page__header">
+        <h1 id="welcome-heading">Alumni dashboard</h1>
+        <p class="page__subtitle">Your profile, network and the opportunities you share with current students.</p>
+      </div>
+
+      <div id="approval-notice" style="margin-bottom:20px;"></div>
+
+      <!-- Profile summary -------------------------------------------------- -->
+      <section class="card" style="margin-bottom:24px;">
+        <div class="card__header">
+          <h2 class="card__title">My profile</h2>
+          <a class="btn btn--secondary btn--sm" href="/profile.html">Edit profile</a>
+        </div>
+        <div id="profile-summary"></div>
+      </section>
+
+      <!-- Quick actions ---------------------------------------------------- -->
+      <div class="row" style="gap:12px;margin-bottom:24px;">
+        <a class="btn btn--primary" href="/connections.html">My network</a>
+        <a class="btn btn--secondary" href="/alumni-directory.html">Find alumni</a>
+        <a class="btn btn--secondary" href="/jobs.html">Browse jobs</a>
+        <a class="btn btn--ghost" href="/news.html">Campus news</a>
+      </div>
+
+      <!-- Two columns ------------------------------------------------------ -->
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;">
+        <!-- Job posting form -->
+        <section class="card">
+          <div class="card__header">
+            <h2 class="card__title">Post an opportunity</h2>
+          </div>
+          <p class="field__hint" id="post-job-hint" style="margin-bottom:12px;">
+            Share a role from your workplace with current students and fellow alumni.
+          </p>
+          <form class="form" id="job-post-form" novalidate>
+            <div class="field">
+              <label class="field__label" for="title">Job title</label>
+              <input class="input" type="text" id="title" name="title" required maxlength="200" placeholder="e.g. Frontend Intern">
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label class="field__label" for="company">Company</label>
+                <input class="input" type="text" id="company" name="company" required maxlength="152" placeholder="e.g. TCS">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="location">Location</label>
+                <input class="input" type="text" id="location" name="location" maxlength="152" placeholder="e.g. Bengaluru / Remote">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="jobType">Type</label>
+                <select class="select" id="jobType" name="jobType">
+                  <option value="full_time">Full time</option>
+                  <option value="part_time">Part time</option>
+                  <option value="internship">Internship</option>
+                  <option value="contract">Contract</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field__label" for="deadline">Application deadline</label>
+                <input class="input" type="date" id="deadline" name="deadline">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="description">Description</label>
+              <textarea class="textarea" id="description" name="description" maxlength="5000" placeholder="What is the role about? What skills are needed?"></textarea>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="applyUrl">Application link</label>
+              <input class="input" type="url" id="applyUrl" name="applyUrl" required
+                     placeholder="https://careers.example.com/job/123">
+              <p class="field__hint">Must be a full http:// or https:// address.</p>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">Publish job</button>
+          </form>
+        </section>
+
+        <!-- My job postings -->
+        <section class="card">
+          <div class="card__header">
+            <h2 class="card__title">My job postings</h2>
+          </div>
+          <div id="my-jobs"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal · Alumni dashboard</span>
+      <span><a href="/alumni-directory.html">Directory</a> · <a href="/connections.html">Network</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/events.js"></script>
+  <script src="/js/alumni.js"></script>
+  <script src="/js/pages/alumni-dashboard.js"></script>
+</body>
+</html>

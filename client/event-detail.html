@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event details · Campus Portal</title>
+  <meta name="description" content="Event details, seat availability and registration.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+  <div id="verification-banner"></div>
+
+  <main id="main" class="page">
+    <div class="container">
+      <p style="margin-bottom:16px;"><a href="/events.html">← Back to all events</a></p>
+
+      <div id="event-detail" aria-live="polite" aria-busy="true">
+        <div class="state"><div class="spinner" aria-hidden="true"></div><p>Loading event…</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal · Event details</span>
+      <span><a href="/events.html">All events</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/events.js"></script>
+  <script src="/js/pages/event-detail.js"></script>
+</body>
+</html>

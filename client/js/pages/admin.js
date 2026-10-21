@@ -1,0 +1,1 @@
+Auth.boot('home', () => Admin.initAdminPage());

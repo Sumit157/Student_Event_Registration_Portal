@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verify your email · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+
+  <main id="main">
+    <div class="auth">
+      <div class="auth__card">
+        <div class="auth__brand">
+          <span class="navbar__logo" aria-hidden="true">✉️</span>
+          <span>Email verification</span>
+        </div>
+        <h1 class="auth__title">Confirm your address</h1>
+        <p class="auth__subtitle">One quick check to keep the portal free of fake accounts.</p>
+
+        <div id="verify-result" role="status" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Checking your link…</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal</span>
+      <span><a href="/index.html">Home</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/pages/verify-email.js"></script>
+</body>
+</html>

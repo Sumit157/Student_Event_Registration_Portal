@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administration · Campus Portal</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+  <div id="verification-banner"></div>
+
+  <main id="main" class="page">
+    <div class="container">
+      <div class="page__header">
+        <h1>Administrator dashboard</h1>
+        <p class="page__subtitle">
+          Every action on this page is also enforced on the server — the API rejects
+          any request that is not from an active administrator account.
+        </p>
+      </div>
+
+      <!-- Stats ------------------------------------------------------------ -->
+      <section aria-labelledby="stats-heading" style="margin-bottom:28px;">
+        <h2 id="stats-heading" class="visually-hidden">Portal statistics</h2>
+        <div class="grid grid--stats" id="admin-stats"></div>
+      </section>
+
+      <div class="card" style="margin-bottom:24px;">
+        <h2 class="card__title" style="margin-bottom:14px;">Upcoming events at a glance</h2>
+        <div id="upcoming-events"></div>
+      </div>
+
+      <!-- Tabs ------------------------------------------------------------ -->
+      <div class="tabs" role="tablist" id="admin-tabs" aria-label="Administration sections">
+        <button class="tab" role="tab" type="button" data-target="events" aria-selected="true">Events</button>
+        <button class="tab" role="tab" type="button" data-target="users" aria-selected="false">Users</button>
+        <button class="tab" role="tab" type="button" data-target="alumni" aria-selected="false">Alumni approvals</button>
+        <button class="tab" role="tab" type="button" data-target="reports" aria-selected="false">Reports</button>
+        <button class="tab" role="tab" type="button" data-target="news" aria-selected="false">News</button>
+      </div>
+
+      <!-- ================= EVENTS ================= -->
+      <section data-tab="events">
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card__header">
+            <h2 class="card__title" id="event-form-heading">Create a new event</h2>
+            <button class="btn btn--ghost btn--sm" type="button" id="event-form-cancel" hidden>Cancel editing</button>
+          </div>
+
+          <form class="form" id="event-form" novalidate>
+            <div class="form-grid">
+              <div class="field form-grid--full">
+                <label class="field__label" for="title">Title</label>
+                <input class="input" type="text" id="title" name="title" required maxlength="200" placeholder="e.g. Annual Tech Symposium 2026">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="category">Category</label>
+                <input class="input" type="text" id="category" name="category" maxlength="60" placeholder="workshop / cultural / sports / career">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="venue">Venue</label>
+                <input class="input" type="text" id="venue" name="venue" maxlength="200" placeholder="e.g. Main Auditorium">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="eventDate">Starts</label>
+                <input class="input" type="datetime-local" id="eventDate" name="eventDate" required>
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="endDate">Ends (optional)</label>
+                <input class="input" type="datetime-local" id="endDate" name="endDate">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="capacity">Capacity (seats)</label>
+                <input class="input" type="number" id="capacity" name="capacity" required min="0" max="100000" placeholder="e.g. 60">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="description">Description</label>
+              <textarea class="textarea" id="description" name="description" maxlength="10000" placeholder="What is this event about? Who should attend?"></textarea>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <button class="btn btn--primary" type="submit">Create event</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Manage events</h2>
+            <span class="field__hint">Edit capacity, notify attendees, or remove an event.</span>
+          </div>
+          <div id="events-table"></div>
+        </div>
+      </section>
+
+      <!-- ================= USERS ================= -->
+      <section data-tab="users" hidden>
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">User management</h2>
+          </div>
+
+          <form class="filters" id="user-filters">
+            <div class="field">
+              <label class="field__label" for="u-q">Search</label>
+              <input class="input" type="search" id="u-q" name="q" placeholder="Name, email or college ID">
+            </div>
+            <div class="field">
+              <label class="field__label" for="u-role">Role</label>
+              <select class="select" id="u-role" name="role">
+                <option value="">All roles</option>
+                <option value="student">Student</option>
+                <option value="alumni">Alumni</option>
+                <option value="admin">Administrator</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field__label" for="u-status">Status</label>
+              <select class="select" id="u-status" name="status">
+                <option value="">Any status</option>
+                <option value="active">Active</option>
+                <option value="suspended">Suspended</option>
+              </select>
+            </div>
+            <div class="filters__actions">
+              <button class="btn btn--primary" type="submit">Apply</button>
+              <button class="btn btn--ghost" type="button" id="user-clear">Clear</button>
+            </div>
+          </form>
+
+          <div id="users-table"></div>
+        </div>
+      </section>
+
+      <!-- ================= ALUMNI ================= -->
+      <section data-tab="alumni" hidden>
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Alumni approval queue</h2>
+            <span class="field__hint">Approved profiles appear in the public directory and gain posting rights.</span>
+          </div>
+          <div id="pending-alumni"></div>
+        </div>
+      </section>
+
+      <!-- ================= REPORTS ================= -->
+      <section data-tab="reports" hidden>
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Registration report</h2>
+            <button class="btn btn--success btn--sm" type="button" id="export-csv">⬇ Export CSV</button>
+          </div>
+
+          <form class="filters" id="report-filters">
+            <div class="field">
+              <label class="field__label" for="r-event">Event</label>
+              <select class="select" id="r-event" name="eventId">
+                <option value="">All events</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field__label" for="r-status">Status</label>
+              <select class="select" id="r-status" name="status">
+                <option value="">All statuses</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="waitlisted">Waitlisted</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="filters__actions">
+              <button class="btn btn--primary" type="submit">Apply</button>
+              <button class="btn btn--ghost" type="button" id="report-clear">Clear</button>
+            </div>
+          </form>
+
+          <div id="registrations-table"></div>
+        </div>
+      </section>
+
+      <!-- ================= NEWS ================= -->
+      <section data-tab="news" hidden>
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Publish an announcement</h2>
+          </div>
+          <form class="form" id="news-form" novalidate>
+            <div class="field">
+              <label class="field__label" for="n-title">Title</label>
+              <input class="input" type="text" id="n-title" name="title" required maxlength="200" placeholder="e.g. Semester registration opens Monday">
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="n-content">Content</label>
+              <textarea class="textarea" id="n-content" name="content" required maxlength="10000" rows="6"
+                        placeholder="Write the announcement. It appears on the public news page where students can comment."></textarea>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+            <button class="btn btn--primary" type="submit">Publish announcement</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal · Administration</span>
+      <span><a href="/index.html">Back to site</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/events.js"></script>
+  <script src="/js/alumni.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="/js/pages/admin.js"></script>
+</body>
+</html>

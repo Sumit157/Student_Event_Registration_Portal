@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My profile · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+  <div id="verification-banner"></div>
+
+  <main id="main" class="page">
+    <div class="container">
+      <div class="page__header">
+        <h1>My profile</h1>
+        <p class="page__subtitle">Update your details. Alumni fields only apply to alumni accounts.</p>
+      </div>
+
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;">
+
+        <!-- Details form --------------------------------------------------- -->
+        <section class="card">
+          <div class="card__header"><h2 class="card__title">Account details</h2></div>
+
+          <form class="form" id="profile-form" novalidate>
+            <div class="field">
+              <label class="field__label" for="name">Full name</label>
+              <input class="input" type="text" id="name" name="name" maxlength="120" required>
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">Email address</label>
+              <input class="input" type="email" id="email" name="email" disabled>
+              <p class="field__hint">The email address cannot be changed here.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="collegeId">College ID</label>
+              <input class="input" type="text" id="collegeId" name="collegeId" maxlength="50">
+              <p class="field__error" aria-live="polite"></p>
+            </div>
+
+            <div id="alumni-profile-fields" class="stack" hidden>
+              <hr style="border:0;border-top:1px solid var(--border);width:100%;margin:4px 0;">
+
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field__label" for="graduationYear">Graduation year</label>
+                  <input class="input" type="number" id="graduationYear" name="graduationYear" min="1950" max="2100">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="degree">Degree</label>
+                  <input class="input" type="text" id="degree" name="degree" maxlength="120">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="company">Company</label>
+                  <input class="input" type="text" id="company" name="company" maxlength="152">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="designation">Designation</label>
+                  <input class="input" type="text" id="designation" name="designation" maxlength="120">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="bio">Biography</label>
+                <textarea class="textarea" id="bio" name="bio" maxlength="2000"
+                          placeholder="A short introduction shown in the alumni directory."></textarea>
+                <p class="field__hint">Shown publicly once your profile is approved. Maximum 2000 characters.</p>
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <button class="btn btn--primary" type="submit">Save changes</button>
+          </form>
+        </section>
+
+        <!-- Avatar --------------------------------------------------------- -->
+        <section class="card">
+          <div class="card__header"><h2 class="card__title">Profile picture</h2></div>
+
+          <div class="stack">
+            <div class="avatar avatar--lg" id="avatar-preview" style="margin-inline:auto;">
+              <span id="avatar-initials">…</span>
+            </div>
+
+            <p class="field__hint" style="text-align:center;">
+              JPEG, PNG, GIF or WebP. Maximum 2 MB. The file type is checked against the
+              image's actual contents, not just its name.
+            </p>
+
+            <form class="form" id="avatar-form">
+              <div class="field">
+                <label class="field__label" for="avatar">Choose an image</label>
+                <input class="input" type="file" id="avatar" name="avatar"
+                       accept="image/jpeg,image/png,image/gif,image/webp"
+                       style="padding-top:9px;">
+                <p class="field__error" aria-live="polite"></p>
+              </div>
+              <button class="btn btn--primary btn--block" type="submit">Upload picture</button>
+            </form>
+
+            <button class="btn btn--ghost btn--block" type="button" id="avatar-remove" hidden>Remove picture</button>
+
+            <div class="alert alert--info">
+              <div class="grow">
+                <strong>Email verification</strong>
+                <span id="verify-status">Checking…</span>
+              </div>
+              <button class="btn btn--secondary btn--sm" type="button" id="resend-verification" hidden>Resend link</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal · Profile</span>
+      <span><a href="/index.html">Home</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/pages/profile.js"></script>
+</body>
+</html>

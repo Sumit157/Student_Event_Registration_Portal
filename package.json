@@ -1,0 +1,50 @@
+{
+  "name": "student-event-registration-alumni-portal",
+  "version": "1.0.0",
+  "description": "Unified college portal combining student event registration and alumni networking (Assignment Tasks 1-8).",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:setup": "node scripts/setup-db.js",
+    "db:seed": "node scripts/seed.js",
+    "create-admin": "node scripts/create-admin.js",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:integration": "node --test --test-concurrency=1 \"tests/integration/*.test.js\""
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "jwt",
+    "student-portal",
+    "alumni",
+    "events"
+  ],
+  "author": "College Assignment",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.0",
+    "mysql2": "^3.12.0",
+    "nodemailer": "^10.1.7",
+    "sanitize-html": "^2.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "puppeteer-core": "^25.15.0",
+    "supertest": "^7.0.0"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events · Campus Portal</title>
+  <meta name="description" content="Browse and register for college events.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="shell-nav"></header>
+  <div id="verification-banner"></div>
+
+  <main id="main" class="page">
+    <div class="container">
+      <div class="page__header">
+        <h1>College events</h1>
+        <p class="page__subtitle">Search, filter and register. Ten events per page.</p>
+      </div>
+
+      <!-- Filters ---------------------------------------------------------- -->
+      <form class="filters" id="events-filters" role="search" aria-label="Search events">
+        <div class="field" style="grid-column:span 2;">
+          <label class="field__label" for="q">Search</label>
+          <input class="input" type="search" id="q" name="q" placeholder="Title, description or venue">
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="category">Category</label>
+          <select class="select" id="category" name="category">
+            <option value="">All categories</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="from">From date</label>
+          <input class="input" type="date" id="from" name="from">
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="to">To date</label>
+          <input class="input" type="date" id="to" name="to">
+        </div>
+
+        <div class="filters__actions">
+          <button class="btn btn--primary" type="submit">Apply</button>
+          <button class="btn btn--ghost" type="button" id="filters-clear">Clear</button>
+        </div>
+      </form>
+
+      <!-- Results ---------------------------------------------------------- -->
+      <div class="grid grid--cards" id="events-grid" aria-live="polite" aria-busy="true">
+        <div class="state"><div class="spinner" aria-hidden="true"></div><p>Loading events…</p></div>
+      </div>
+
+      <div id="events-pagination" role="navigation" aria-label="Event pages"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Campus Portal · Events</span>
+      <span><a href="/my-registrations.html">My registrations</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/ui.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/events.js"></script>
+  <script src="/js/pages/events.js"></script>
+</body>
+</html>

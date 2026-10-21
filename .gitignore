@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+SECURITY.md
+SUBMISSION-CHECKLIST.md
+TESTING.md
+
+# Environment variables (never commit real secrets)
+.env
+.env.local
+.env.*.local
+
+# Uploaded private files - user content must never enter version control
+uploads/*
+!uploads/.gitkeep
+!uploads/README.md
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/
+
+# Test artifacts
+coverage/
+test-results/
+
+# Generated evidence screenshots are large binaries; keep the manifest only
+evidence/screenshots/*.png
+evidence/screenshots/*.jpg
