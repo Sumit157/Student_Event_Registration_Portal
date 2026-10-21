@@ -115,8 +115,14 @@ async function main() {
   check('student is refused by the admin API', studentOnAdmin.status === 403,
     `status=${studentOnAdmin.status}`);
 
-  // Register for the first open (non-full) event and confirm a seat.
-  const open = (events.json?.data?.events || []).find((e) => (e.capacityInfo?.seatsRemaining ?? 1) > 0);
+  // Register for the first open (non-full, still upcoming) event and confirm a seat.
+  // The list endpoint returns FLAT seatsRemaining (the nested capacityInfo shape
+  // only exists on the detail endpoint), and the server refuses registration for a
+  // past event with EVENT_PASSED - so require both a free seat and a future start.
+  const now = Date.now();
+  const open = (events.json?.data?.events || []).find((e) =>
+    (e.seatsRemaining ?? e.capacityInfo?.seatsRemaining ?? 0) > 0
+    && new Date(e.eventDate).getTime() > now);
   if (open) {
     const r = await call('POST', `/api/events/${open.id}/register`);
     check('student registers for an open event', [201, 409].includes(r.status),

@@ -71,7 +71,7 @@
           const body = await Api.get('/jobs/mine/posted');
           const jobs = body.data.jobs;
           if (jobs.length === 0) {
-            UI.replace(jobsSlot, UI.emptyState('Nothing posted yet', 'Use the form to share your first opportunity.', '💼'));
+            UI.replace(jobsSlot, UI.emptyState('Nothing posted yet', 'Use the form to share your first opportunity.', 'briefcase'));
             return;
           }
           UI.replace(jobsSlot, UI.el('div', { class: 'stack-sm' }, jobs.map((job) => {

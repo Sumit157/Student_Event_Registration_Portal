@@ -47,7 +47,10 @@ const Events = (() => {
   function countdownChip(eventDate) {
     const label = UI.countdownLabel(eventDate);
     if (!label) return null;
-    return UI.el('span', { class: 'countdown', text: `⏳ ${label}` });
+    const parts = UI.countdownParts(eventDate);
+    // Under an hour to go, the chip turns gold and the dot begins to pulse.
+    const soon = Boolean(parts) && parts.days === 0 && parts.hours === 0;
+    return UI.el('span', { class: `countdown${soon ? ' is-soon' : ''}`, text: label });
   }
 
   /**
@@ -69,8 +72,8 @@ const Events = (() => {
     ]);
 
     const meta = UI.el('div', { class: 'stack-sm' }, [
-      UI.el('p', { class: 'event-card__meta', text: `🕐 ${UI.formatDateTime(event.eventDate)}` }),
-      event.venue ? UI.el('p', { class: 'event-card__meta', text: `📍 ${event.venue}` }) : null,
+      UI.el('p', { class: 'event-card__meta event-card__meta--when', text: UI.formatDateTime(event.eventDate) }),
+      event.venue ? UI.el('p', { class: 'event-card__meta event-card__meta--where', text: event.venue }) : null,
       countdownChip(event.eventDate),
     ]);
 
@@ -80,7 +83,7 @@ const Events = (() => {
 
     if (options.actionLabel) {
       const action = UI.el('button', {
-        class: `btn btn--sm ${options.dangerAction ? 'btn--danger' : 'btn--primary'}`,
+        class: `btn btn--sm ${options.dangerAction ? 'btn--danger' : 'btn--register'}`,
         type: 'button',
         text: options.actionLabel,
         disabled: options.disableAction ? 'disabled' : null,
@@ -90,6 +93,9 @@ const Events = (() => {
       }
       footerChildren.push(action);
     }
+
+    // A thin capacity bar, when the API gave us numbers to draw it from.
+    const meter = UI.seatMeter({ capacity: event.capacity, seatsRemaining: event.seatsRemaining });
 
     return UI.el('article', { class: 'event-card' }, [
       banner,
@@ -102,6 +108,7 @@ const Events = (() => {
           text: event.description ? String(event.description).slice(0, 110) + (event.description.length > 110 ? '…' : '') : 'No description provided.',
         }),
         meta,
+        meter,
         UI.el('div', { class: 'event-card__footer' }, footerChildren),
       ]),
     ]);
@@ -149,7 +156,7 @@ const Events = (() => {
             state.q || state.category || state.from || state.to
               ? 'Try clearing the filters or searching for something else.'
               : 'Check back soon - new events are published regularly.',
-            '📅'
+            'calendar'
           ));
           return;
         }
@@ -270,7 +277,7 @@ const Events = (() => {
       } catch (error) {
         if (error.status === 404) {
           UI.replace(slot, UI.el('div', { class: 'state' }, [
-            UI.el('div', { class: 'state__icon', text: '🔍' }),
+            UI.el('div', { class: 'state__icon', 'aria-hidden': 'true' }, [UI.icon('search', 24)]),
             UI.el('h3', { text: 'Event not found' }),
             UI.el('p', { text: 'This event may have been removed or the link is incorrect.' }),
             UI.el('a', { class: 'btn btn--primary', href: '/events.html', text: 'Browse all events' }),
@@ -289,9 +296,14 @@ const Events = (() => {
       if (!chip) return;
       const target = chip.dataset.date;
       const label = UI.countdownLabel(target);
-      if (label) chip.textContent = `⏳ ${label}`;
-      else {
-        chip.textContent = '🔴 In progress / started';
+      if (label) {
+        chip.textContent = label;
+        const parts = UI.countdownParts(target);
+        chip.classList.toggle('is-soon', Boolean(parts) && parts.days === 0 && parts.hours === 0);
+        chip.classList.remove('is-live');
+      } else {
+        chip.textContent = 'In progress';
+        chip.classList.remove('is-soon');
         chip.classList.add('is-live');
       }
     }, 1000);
@@ -307,7 +319,8 @@ const Events = (() => {
     const capacityBox = UI.el('div', { class: 'card' }, [
       UI.el('h2', { class: 'card__title', text: 'Availability' }),
       UI.el('div', { class: 'stack-sm' }, [
-        UI.el('p', { text: `${info.confirmed || 0} of ${event.capacity} seats taken` }),
+        UI.seatMeter({ capacity: event.capacity, taken: info.confirmed, seatsRemaining: info.seatsRemaining })
+          || UI.el('p', { text: `${info.confirmed || 0} of ${event.capacity} seats taken` }),
         UI.el('div', { class: 'seats' }, [seatsLabel({ ...event, seatsRemaining: info.seatsRemaining }) || UI.el('span', { text: '—' })]),
         info.waitlisted > 0 ? UI.el('p', { class: 'field__hint', text: `${info.waitlisted} student(s) currently waitlisted.` }) : null,
       ]),
@@ -334,7 +347,7 @@ const Events = (() => {
       actionArea.appendChild(cancelBtn);
     } else {
       const registerBtn = UI.el('button', {
-        class: 'btn btn--primary btn--block',
+        class: 'btn btn--register btn--block',
         type: 'button',
         text: info.isFull ? 'Join the waitlist' : 'Register for this event',
       });
@@ -353,13 +366,16 @@ const Events = (() => {
           class: 'countdown',
           id: 'detail-countdown',
           dataset: { date: event.eventDate || '' },
-          text: UI.countdownLabel(event.eventDate) ? `⏳ ${UI.countdownLabel(event.eventDate)}` : '🔴 Started',
+          text: UI.countdownLabel(event.eventDate) || 'Started',
         }),
       ]),
       UI.el('h1', { text: event.title }),
       UI.el('div', { class: 'stack-sm' }, [
-        UI.el('p', { class: 'event-card__meta', text: `🕐 ${UI.formatDateTime(event.eventDate)}${event.endDate ? `  →  ${UI.formatDateTime(event.endDate)}` : ''}` }),
-        event.venue ? UI.el('p', { class: 'event-card__meta', text: `📍 ${event.venue}` }) : null,
+        UI.el('p', {
+          class: 'event-card__meta event-card__meta--when',
+          text: UI.formatDateTime(event.eventDate) + (event.endDate ? ` to ${UI.formatDateTime(event.endDate)}` : ''),
+        }),
+        event.venue ? UI.el('p', { class: 'event-card__meta event-card__meta--where', text: event.venue }) : null,
         event.createdBy ? UI.el('p', { class: 'event-card__meta', text: `Organised by ${event.createdBy}` }) : null,
       ]),
       UI.el('div', { class: 'alert alert--info' }, [
@@ -367,7 +383,7 @@ const Events = (() => {
       ]),
     ]);
 
-    slot.appendChild(UI.el('div', { class: 'grid', style: { gridTemplateColumns: 'minmax(0, 2fr) minmax(260px, 1fr)' } }, [
+    slot.appendChild(UI.el('div', { class: 'grid grid--detail' }, [
       main,
       UI.el('div', { class: 'stack' }, [capacityBox, UI.el('div', { class: 'card' }, [UI.el('h2', { class: 'card__title', text: 'Actions' }), actionArea])]),
     ]));
@@ -377,7 +393,7 @@ const Events = (() => {
   function statusBadge(status) {
     const map = {
       confirmed: ['badge--confirmed', '✓ Confirmed'],
-      waitlisted: ['badge--waitlisted', '⏳ Waitlisted'],
+      waitlisted: ['badge--waitlisted', 'Waitlisted'],
       cancelled: ['badge--cancelled', '✕ Cancelled'],
     };
     const [className, label] = map[status] || ['badge--neutral', status];
@@ -448,7 +464,7 @@ const Events = (() => {
             filter === 'active'
               ? 'You have no active registrations. Browse the events list to find something to join.'
               : 'No registrations match this filter.',
-            '🎟️'
+            'ticket'
           ));
           slot.appendChild(UI.el('a', { class: 'btn btn--primary', href: '/events.html', text: 'Browse events' }));
           return;
@@ -517,8 +533,8 @@ const Events = (() => {
       UI.el('div', { class: 'row row--between' }, [
         UI.el('div', { class: 'grow' }, [
           UI.el('h3', { class: 'card__title', text: event.title }),
-          UI.el('p', { class: 'event-card__meta', text: `🕐 ${UI.formatDateTime(event.eventDate)}` }),
-          event.venue ? UI.el('p', { class: 'event-card__meta', text: `📍 ${event.venue}` }) : null,
+          UI.el('p', { class: 'event-card__meta event-card__meta--when', text: UI.formatDateTime(event.eventDate) }),
+          event.venue ? UI.el('p', { class: 'event-card__meta event-card__meta--where', text: event.venue }) : null,
         ]),
         UI.el('div', { class: 'stack-sm', style: { alignItems: 'flex-end' } }, [
           statusBadge(row.status),

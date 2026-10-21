@@ -130,7 +130,7 @@ const Admin = (() => {
       const events = body.data.events;
 
       if (events.length === 0) {
-        UI.replace(slot, UI.emptyState('No events yet', 'Create the first event using the form above.', '📅'));
+        UI.replace(slot, UI.emptyState('No events yet', 'Create the first event using the form above.', 'calendar'));
         return;
       }
 
@@ -323,7 +323,7 @@ const Admin = (() => {
       const { users, pagination } = body.data;
 
       if (users.length === 0) {
-        UI.replace(slot, UI.emptyState('No users found', 'Adjust the search filters above.', '👥'));
+        UI.replace(slot, UI.emptyState('No users found', 'Adjust the search filters above.', 'users'));
         return;
       }
 
@@ -412,7 +412,7 @@ const Admin = (() => {
       const items = body.data.pending;
 
       if (items.length === 0) {
-        UI.replace(slot, UI.emptyState('No pending applications', 'All alumni profiles have been reviewed.', '✅'));
+        UI.replace(slot, UI.emptyState('No pending applications', 'All alumni profiles have been reviewed.', 'checkCircle'));
         return;
       }
 
@@ -456,9 +456,9 @@ const Admin = (() => {
           UI.el('div', { class: 'row row--between' }, [
             UI.el('div', { class: 'grow' }, [
               UI.el('h3', { class: 'card__title', text: person.name }),
-              UI.el('p', { class: 'event-card__meta', text: `✉️ ${person.email}` }),
-              UI.el('p', { class: 'event-card__meta', text: `🎓 ${person.graduationYear || 'Year unknown'} · ${person.degree || 'Degree not specified'}` }),
-              person.company ? UI.el('p', { class: 'event-card__meta', text: `🏢 ${person.company}${person.designation ? ` · ${person.designation}` : ''}` }) : null,
+              UI.el('p', { class: 'event-card__meta', text: person.email }),
+              UI.el('p', { class: 'event-card__meta', text: `${person.graduationYear || 'Year unknown'} · ${person.degree || 'Degree not specified'}` }),
+              person.company ? UI.el('p', { class: 'event-card__meta', text: `${person.company}${person.designation ? ` · ${person.designation}` : ''}` }) : null,
               person.bio ? UI.el('p', { class: 'alumni-card__bio', text: person.bio }) : null,
             ]),
             UI.el('div', { class: 'stack-sm' }, [
@@ -541,7 +541,7 @@ const Admin = (() => {
       const { registrations, pagination } = body.data;
 
       if (registrations.length === 0) {
-        UI.replace(slot, UI.emptyState('No registrations match', 'Try clearing the filters.', '📋'));
+        UI.replace(slot, UI.emptyState('No registrations match', 'Try clearing the filters.', 'clipboard'));
         return;
       }
 

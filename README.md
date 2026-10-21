@@ -124,7 +124,12 @@ MySQL backend. No frontend framework, no build step.
 │   ├── passwordPolicy.js   # min 8 chars, ≥1 uppercase, ≥1 digit
 │   └── sanitize.js         # HTML sanitisation helpers
 ├── client/                 # static frontend served by Express
-│   ├── css/styles.css      # single design system
+│   ├── css/styles.css      # single design system (tokens, glass, cards)
+│   ├── fonts/              # self-hosted variable fonts - Inter (body) and
+│   │                       #   Space Grotesk (display), 69 KB total. Served
+│   │                       #   same-origin, so the strict CSP needs no
+│   │                       #   external font origin and the portal renders
+│   │                       #   identically offline.
 │   ├── js/                 # api, auth, events, alumni, admin, ui modules
 │   │   └── pages/          # one external boot script per page (keeps the
 │   │                       #   CSP strict: no inline <script> anywhere)

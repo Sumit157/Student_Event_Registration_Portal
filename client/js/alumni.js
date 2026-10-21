@@ -51,7 +51,7 @@ const Alumni = (() => {
           UI.replace(grid, UI.emptyState(
             'No alumni match your search',
             'Try widening the filters - the directory only shows profiles that have been verified and approved.',
-            '🎓'
+            'cap'
           ));
           return;
         }
@@ -103,10 +103,10 @@ const Alumni = (() => {
     ]);
 
     const meta = UI.el('div', { class: 'alumni-card__meta' }, [
-      person.graduationYear ? UI.el('span', { text: `🎓 Class of ${person.graduationYear}` }) : null,
-      person.degree ? UI.el('span', { text: `📘 ${person.degree}` }) : null,
-      person.company ? UI.el('span', { text: `🏢 ${person.company}` }) : null,
-      person.email ? UI.el('span', { text: `✉️ ${person.email}` }) : null,
+      person.graduationYear ? UI.el('span', { text: `Class of ${person.graduationYear}` }) : null,
+      person.degree ? UI.el('span', { text: `${person.degree}` }) : null,
+      person.company ? UI.el('span', { text: `${person.company}` }) : null,
+      person.email ? UI.el('span', { text: `${person.email}` }) : null,
     ]);
 
     const bio = person.bio
@@ -210,7 +210,7 @@ const Alumni = (() => {
           UI.replace(list, UI.emptyState(
             'No job postings yet',
             'Approved alumni can share opportunities from the "Post a job" tab on their dashboard.',
-            '💼'
+            'briefcase'
           ));
           return;
         }
@@ -246,7 +246,7 @@ const Alumni = (() => {
       UI.el('div', { class: 'row row--between' }, [
         UI.el('div', { class: 'grow' }, [
           UI.el('h3', { class: 'card__title', text: job.title }),
-          UI.el('p', { class: 'event-card__meta', text: `🏢 ${job.company}${job.location ? ` · 📍 ${job.location}` : ''}` }),
+          UI.el('p', { class: 'event-card__meta', text: `${job.company}${job.location ? ` · ${job.location}` : ''}` }),
         ]),
         UI.el('div', { class: 'stack-sm', style: { alignItems: 'flex-end' } }, [
           UI.el('span', { class: 'badge badge--role', text: String(job.jobType || '').replace('_', ' ') }),
@@ -380,7 +380,7 @@ const Alumni = (() => {
           networkCard.appendChild(UI.emptyState(
             'Your network is empty',
             'Accept a request or send one from the alumni directory to start building your network.',
-            '🤝'
+            'link'
           ));
         } else {
           networkCard.appendChild(UI.el('div', { class: 'grid grid--cards' },
@@ -454,7 +454,7 @@ const Alumni = (() => {
         const { news, pagination } = body.data;
 
         if (!news || news.length === 0) {
-          UI.replace(list, UI.emptyState('No announcements yet', 'College news will appear here.', '📰'));
+          UI.replace(list, UI.emptyState('No announcements yet', 'College news will appear here.', 'news'));
           return;
         }
 
@@ -469,7 +469,7 @@ const Alumni = (() => {
       const commentsSlot = UI.el('div', { class: 'stack-sm', style: { marginTop: '12px' } });
       const toggle = UI.el('button', {
         class: 'btn btn--ghost btn--sm', type: 'button',
-        text: `💬 ${item.commentCount} comment${item.commentCount === 1 ? '' : 's'}`,
+        text: `${item.commentCount} comment${item.commentCount === 1 ? '' : 's'}`,
       });
       let loaded = false;
 

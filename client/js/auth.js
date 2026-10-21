@@ -158,14 +158,15 @@ const Auth = (() => {
     if (!shell || shell.dataset.rendered === 'true') return null;
 
     const brand = UI.el('a', { class: 'navbar__brand', href: '/index.html' }, [
-      UI.el('span', { class: 'navbar__logo', 'aria-hidden': 'true', text: '🎓' }),
+      // The glyph is painted by CSS (.navbar__logo::before) so it is
+      // identical on every page.
+      UI.el('span', { class: 'navbar__logo', 'aria-hidden': 'true' }),
       UI.el('span', { text: 'Campus Portal' }),
     ]);
 
     const toggle = UI.el('button', {
       class: 'navbar__toggle', type: 'button',
       'aria-label': 'Toggle navigation menu', 'aria-expanded': 'false', 'aria-controls': 'primary-nav',
-      text: '☰',
     });
 
     const nav = UI.buildNavbar(activeKey);
@@ -179,17 +180,16 @@ const Auth = (() => {
 
     shell.appendChild(UI.el('div', { class: 'container navbar__inner' }, [brand, toggle, nav]));
 
+    // The two bars become a cross purely in CSS, keyed off aria-expanded.
     toggle.addEventListener('click', () => {
       const open = nav.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.textContent = open ? '✕' : '☰';
     });
     // Close the menu after choosing a link (important on mobile).
     nav.addEventListener('click', (event) => {
       if (event.target.closest('a')) {
         nav.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.textContent = '☰';
       }
     });
 

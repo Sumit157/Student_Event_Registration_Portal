@@ -29,7 +29,7 @@
           UI.replace(regSlot, UI.emptyState(
             'No upcoming events',
             'You are not registered for anything yet. Find something you like and grab a seat.',
-            '🎟️'
+            'ticket'
           ));
           regSlot.appendChild(UI.el('a', { class: 'btn btn--primary', href: '/events.html', text: 'Browse events' }));
         } else {
@@ -60,7 +60,7 @@
         const body = await Api.get('/news?page=1&pageSize=4', { auth: false });
         const items = body.data.news;
         if (items.length === 0) {
-          UI.replace(newsSlot, UI.emptyState('No announcements yet', 'Check back soon.', '📰'));
+          UI.replace(newsSlot, UI.emptyState('No announcements yet', 'Check back soon.', 'news'));
         } else {
           UI.replace(newsSlot, UI.el('div', { class: 'stack-sm' }, items.map((item) => UI.el('div', { class: 'stack-sm', style: { paddingBottom: '10px', borderBottom: '1px solid var(--border)' } }, [
             UI.el('a', { href: `/news.html#news-${item.id}`, text: item.title, style: { fontWeight: '600' } }),

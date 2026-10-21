@@ -17,11 +17,9 @@
     <!-- Hero ------------------------------------------------------------- -->
     <section class="hero">
       <div class="container">
-        <span class="badge badge--neutral" style="background:rgba(255,255,255,.18);color:#fff;">
-          Student Events &amp; Alumni Network
-        </span>
-        <h1 style="margin-top:12px;">Everything campus, in one portal.</h1>
-        <p>
+        <p class="hero__kicker">Student events &amp; alumni network</p>
+        <h1 class="hero__title">Everything campus, in one portal.</h1>
+        <p class="hero__lede">
           Discover and register for college events, track your seats and waitlists, follow
           campus announcements, and stay connected with alumni who have been where you are going.
         </p>
@@ -35,26 +33,22 @@
     <!-- Live stats ------------------------------------------------------- -->
     <section class="page">
       <div class="container">
-        <div class="grid grid--stats" id="landing-stats">
-          <div class="stat">
-            <div class="stat__label">Upcoming events</div>
-            <div class="stat__value" id="stat-events">—</div>
-            <div class="stat__hint">Open for registration now</div>
+        <div class="ticker" id="landing-stats">
+          <div class="ticker__item">
+            <span class="ticker__value" id="stat-events">—</span>
+            <span class="ticker__label">Upcoming events</span>
           </div>
-          <div class="stat">
-            <div class="stat__label">Alumni network</div>
-            <div class="stat__value" id="stat-alumni">—</div>
-            <div class="stat__hint">Verified &amp; approved members</div>
+          <div class="ticker__item">
+            <span class="ticker__value" id="stat-alumni">—</span>
+            <span class="ticker__label">Alumni network</span>
           </div>
-          <div class="stat">
-            <div class="stat__label">Open roles</div>
-            <div class="stat__value" id="stat-jobs">—</div>
-            <div class="stat__hint">Posted by alumni</div>
+          <div class="ticker__item">
+            <span class="ticker__value" id="stat-jobs">—</span>
+            <span class="ticker__label">Open roles</span>
           </div>
-          <div class="stat">
-            <div class="stat__label">Campus news</div>
-            <div class="stat__value" id="stat-news">—</div>
-            <div class="stat__hint">Latest announcements</div>
+          <div class="ticker__item">
+            <span class="ticker__value" id="stat-news">—</span>
+            <span class="ticker__label">Campus news</span>
           </div>
         </div>
       </div>
@@ -70,7 +64,7 @@
 
         <div class="grid grid--cards">
           <div class="card feature">
-            <div class="feature__icon" aria-hidden="true">🎟️</div>
+            <div class="feature__icon" data-icon="ticket" aria-hidden="true"></div>
             <div>
               <h3>Register for events</h3>
               <p>Search by category and date, see live seat counts and a countdown, and get an automatic waitlist position when an event fills up.</p>
@@ -78,7 +72,7 @@
           </div>
 
           <div class="card feature">
-            <div class="feature__icon" aria-hidden="true">⏳</div>
+            <div class="feature__icon" data-icon="hourglass" aria-hidden="true"></div>
             <div>
               <h3>Fair waitlists</h3>
               <p>Cancel a confirmed place and the next eligible student is promoted automatically and notified by email.</p>
@@ -86,7 +80,7 @@
           </div>
 
           <div class="card feature">
-            <div class="feature__icon" aria-hidden="true">🎓</div>
+            <div class="feature__icon" data-icon="cap" aria-hidden="true"></div>
             <div>
               <h3>Alumni directory</h3>
               <p>Search graduates by year, degree and company. Only verified and administrator-approved profiles appear.</p>
@@ -94,7 +88,7 @@
           </div>
 
           <div class="card feature">
-            <div class="feature__icon" aria-hidden="true">💼</div>
+            <div class="feature__icon" data-icon="briefcase" aria-hidden="true"></div>
             <div>
               <h3>Jobs &amp; opportunities</h3>
               <p>Alumni share openings from their workplaces; students and peers browse and apply through verified links.</p>
@@ -102,7 +96,7 @@
           </div>
 
           <div class="card feature">
-            <div class="feature__icon" aria-hidden="true">🤝</div>
+            <div class="feature__icon" data-icon="link" aria-hidden="true"></div>
             <div>
               <h3>Build your network</h3>
               <p>Send connection requests with clear pending, accepted and rejected states, then see your network in one view.</p>
@@ -110,7 +104,7 @@
           </div>
 
           <div class="card feature">
-            <div class="feature__icon" aria-hidden="true">📰</div>
+            <div class="feature__icon" data-icon="news" aria-hidden="true"></div>
             <div>
               <h3>Campus news</h3>
               <p>Announcements with paginated discussion, so important updates never get buried in a chat group.</p>
@@ -153,7 +147,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <span>Campus Portal · Student Event Registration &amp; Alumni Network</span>
-      <span><a href="/events.html">Events</a> · <a href="/alumni-directory.html">Alumni</a> · <a href="/jobs.html">Jobs</a> · <a href="/news.html">News</a></span>
+      <span class="footer__links"><a href="/events.html">Events</a><a href="/alumni-directory.html">Alumni</a><a href="/jobs.html">Jobs</a><a href="/news.html">News</a></span>
     </div>
   </footer>
 
