@@ -365,6 +365,10 @@ const Auth = (() => {
 
     // Show / hide the alumni-only section based on the chosen role.
     const alumniFields = document.getElementById('alumni-fields');
+    // Graduation year lives in the CORE grid (register.html), not inside
+    // #alumni-fields, so it must be toggled here too — otherwise it stays
+    // disabled and an alumnus can never enter it (the server requires it).
+    const gradYear = form.graduationYear;
     function syncRole() {
       const isAlumni = form.role.value === 'alumni';
       alumniFields.classList.toggle('is-visible', isAlumni);
@@ -373,6 +377,11 @@ const Auth = (() => {
         if (isAlumni) input.setAttribute('required', 'required');
         else input.removeAttribute('required');
       });
+      if (gradYear) {
+        gradYear.disabled = !isAlumni;
+        if (isAlumni) gradYear.setAttribute('required', 'required');
+        else gradYear.removeAttribute('required');
+      }
     }
     form.querySelectorAll('input[name="role"]').forEach((radio) => radio.addEventListener('change', syncRole));
     syncRole();
@@ -405,7 +414,10 @@ const Auth = (() => {
         collegeId: form.collegeId.value.trim(),
       };
       if (payload.role === 'alumni') {
-        payload.graduationYear = Number(form.graduationYear.value);
+        // Send null (not 0) when blank so the server reports "required"
+        // rather than an out-of-range year.
+        payload.graduationYear = form.graduationYear.value
+          ? Number(form.graduationYear.value) : null;
         payload.degree = form.degree.value.trim();
         payload.company = form.company.value.trim();
         payload.designation = form.designation.value.trim();
